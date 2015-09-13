@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--<script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>-->
+    <script src="http://maps.googleapis.com/maps/api/js"> </script>  
+    <script src="js/scripts.js"></script>
+
+    <title>MeetMe | Travel the World With Your Friends.</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    
+    <div id="googleMap" style="width:500px;height:500px;"></div>
+    <div class="text-vertical-center">
+        <h4>Based on our analysis, you should fly to <span id="end_goal"></span> on <span id="date_of_departure"></span></h4>
+        <table id="result_table">
+            <th id="table_head"><td>Traveller</td><td>Cost</td><td>Departure</td></th>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+#InputLocation1{
+            margin-bottom: 30px;
+        }
+
+        #destination{
+            margin-bottom: 30px;
+        }
+
+        #traveller_table, #destination_table{
+            padding-top: 20px;
+        }
+ 
+        #traveller_table th{
+            padding-left: 20%;
+        }
+
+        #below{
+            padding-top: 20px;
+        }
+
+        body{
+            overflow: hidden;
+        }
+
+        .navbar-inner li a:link{
+            background-color: transparent;
+            font-size: 2em;
+            color: black;
+        }
+
+        .navbar-inner li a:hover{
+            color: white;
+            text-decoration: underline;
+            font-size: 2.25em;
+        }
+
+        .navbar {
+            background-color: transparent;
+            border: none;
+        }
+
+        #group_Complete{
+            margin-top: 20px;
+        }
+
+        #destination_Form{
+            display: none;
+        }
+
+        #destinationForm_Instructions{
+            display: none;
+        }
