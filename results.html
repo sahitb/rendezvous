@@ -13,7 +13,7 @@
     
     <script src="js/scripts.js"></script>
 
-    <title>MeetMe | Travel the World With Your Friends.</title>
+    <title>Rendezvous | Travel the World With Your Friends.</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,23 +24,89 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="http://maps.googleapis.com/maps/api/js"> </script> 
+    <style type="text/css">
+      #googleMap
+      {
+        /*width: 1000px;*/
+        height: 500px;
+        text-align: center;
+      }
+      #centerPanel
+      {
+      padding-bottom: 3%;
+     
+      }
+    body
+    {
+      text-align: center;
 
-    <link rel="icon" 
-      type="image/png" 
-      href="img/favicon_plane.jpg">
+      
+    }
+    .tableHeader
+    {
+      text-align: center;
+    }
+
+  .background-image {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+
+    display: block;
+    background: url('img/bg.jpg') no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+  }
+
+  .content {
+    position: relative;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+ 
+
+}
+</style>
+
 </head>
-<body >
-    
-    <div id="googleMap" style="width:1000px;height:500px;"></div>
-
-
-    <div class="text-vertical-center">
-        <h4>Based on our analysis, you should fly to <span id="end_goal"></span> on <span id="date_of_departure"></span></h4>
-        <table id="result_table">
-            <th id="table_head"><td>Traveller</td><td>Cost</td><td>Departure</td></th>
-            <tbody></tbody>
-        </table>
+<body>
+  <div class="background-image"></div>
+  <div class = "content">
+    <div class = "row">
+      <div class = "col-md-1">
+      </div>
+      <div id = "centerPanel" class = "col-md-10">
+        <div class = "text-vertical-center"><h1>Rendezvous</h1></div>
+        <p class = "lead">Based on our analysis, you should fly to:
+        <br> <span id="end_goal"></span> on <span id="date_of_departure"></span></p>
+        <div id="googleMap">
+        </div>
+        <br><br>
+          <table id="result_table" class = "table" style = "background:#fff">
+              <th id="table_head" class = "tableHeader">Traveler</th>
+              <th id="table_head"class = "tableHeader">Cost</th>
+              <th id="table_head"class = "tableHeader">Departure Location</th>
+              <tbody></tbody>
+          </table>
+      </div>
+      <div class = "col-md-1">
+      </div>
     </div>
+  </div>
 </body>
     
     <script src = "js/jquery.js"> </script>
