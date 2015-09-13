@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--<script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>-->
+
+
+    <title>Rendezvous | Travel the World With Your Friends.</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body>
+    <div id = "home" class = "container">
+        <div class = "row">
+            <div class = "col-sm-8 col-sm-offset-2">
+                <ul class="nav nav-pills nav-justified">
+                <li role="presentation"><a href="#home">Register</a></li>
+                <li role="presentation"><a href="#services">About</a></li>
+                <li role="presentation"><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Rendezvous</h1>
+            <h3>Travel the world with your friends.</h3>
+            <br>
+            <div class = "container">
+                <div class = "row">
+                    <div class = "col-sm-2 col-sm-offset-5">
+                        <form id = "dateBox">
+                            <div class="form-group">
+                                <label for="dateInput">Enter the date you wish to leave:</label>
+                                <input type="date" class="form-control" id="dateInput" placeholder="YYYY/MM/DD" value="">
+                                <div class="radio">
+                                    <label><input id="first_radio"name="mode" type="radio" class="optradio">I'm visiting friends!</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input id="second_radio" name="mode" type="radio" class="optradio">We're going on a trip!</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div id = "noDate" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Wait!</strong> Do you really expect to leave never?
+                      </div>
+                       <div id = "noMode" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Wait!</strong> What are you planning to do?
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="dateSubmitted()" class="btn btn-dark btn-lg">Get Out There!!!</button>
+            <a id="jump" href="#portfolio" style: "display:none"></a>
+        </div>
+    </header>
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Portfolio -->
+
+    <section id="portfolio" class="portfolio" style="height:100%">
+        <div class="container">
+            <div class="row">
+                <p id="travellerForm_Instructions" style = "text-align:center" class = "lead">Enter the names and locations of your friends below.</p>
+                <p id="destinationForm_Instructions" style = "text-align:center" class = "lead">Enter your possible destinations below.</p>
+                <div class="col-lg-4 col-md-offset-4 text-center">
+                    <form id="travellerForm">
+                      <div id = "successAlert" style = "display:none "class="alert alert-success">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Success!</strong> A traveller has been added to your group.
+                      </div>
+                      <div id = "failureAlert" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Oops!</strong> Please enter your traveller's info correctly.
+                      </div>
+                      <div id = "noGroup" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Oops!</strong> You did not enter any travellers in your group!
+                      </div>
+                      <div class="form-group">
+                        <label for="InputName1">Friend's Name</label>
+                        <input type="name" class="form-control" id="InputName1" placeholder="Name" value="">
+                        <br>
+                        <label for="InputLocation1">Location</label>
+                        <input type="name" class="form-control" id="InputLocation1" placeholder="Location" value="">
+                      </div>
+                      <div id="hidden_drop" style="display:none"></div>
+                    <button type="button" onclick = "travellerSubmitted()" class="btn btn-default">Add Traveler</button>
+                    </form>
+                    <div id = "destinationAdded" style = "display:none "class="alert alert-success">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Success!</strong> Your possible destination has been added!
+                      </div>
+                     <div id = "falseDestination" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Oops!</strong> You did not enter any destination in the box!
+                      </div>
+                    <div id = "noDestination" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Oops!</strong> You need to let me know where you're going!
+                      </div>
+                   <form id="destination_Form">
+                        <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="name" class="form-control" id="destination" placeholder="Enter Destination" value="">
+                      </div>
+                      <button type="button" onclick = "destinationSubmitted()" class="btn btn-default">Add Destination</button>
+                    </form>
+                    <button id="group_Complete" onclick="decisionMode()" type="button" class="btn btn-default">Thats My Whole Group!
+                    </button>
+
+                    <a id="loading_page" href="loading_page.html"></a>
+                    <div id="traveller_table">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th align:"center">Name</th>
+                                    <th align:"center">Location</th>
+                                </tr>
+                            </thead>
+                            <tbody id="travtable"></tbody>
+                        </table>
+                    </div>
+                    <div id="destination_table" style="display:none">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th align:"center">Possible Destinations</th>
+                                </tr>
+                            </thead>
+                            <tbody id="desttable"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.col-lg-5 -->
+                
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+    <section id="services" class="services bg-primary" style="height:100%">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a name="about"></a>
+                    <h2>What We're About</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Meet Friends</strong>
+                                </h4>
+                                <p>We make it easy to meet up with friends, wherever they are.</p>
+<!--                                 <a href="#" class="btn btn-light">Learn More</a>
+ -->                        </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-globe fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Travel Together</strong>
+                                </h4>
+                                <p>Enter the names and locations of your friends to find out the most cost-effective way
+                                    to meet up.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-usd fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Cost Effective</strong>
+                                </h4>
+                                <p>We save you money by showing you the cheapest flights - for everyone.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class = "row">
+                        <hr>
+                        <p class = "lead">Choose between our two modes: 
+                        </p>
+                        <p class = "lead">
+                             <b>I'm Visiting Friends:</b> <br>This option allows you to plan trips to any of your friends hometowns.
+                        </p>
+                        <p class = "lead">
+                            <b>We're going on a trip:</b><br> This option allows your and your friends to select several destinations you'd like to
+                            travel to and provide the cheapest option for everyone.
+                        </p>
+                        <br>
+                        <br>
+                        <a href="#home"><button type="button" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>Back to top
+                        </button></a>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Footer -->
+    <section id = "contact" style = "height: 100%">
+        <div class="container" style = "padding-top:15%;">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>MeetMe Inc.</strong>
+                    </h4>
+                    <p>2300 Hayward Street, Room 1010<br>Ann Arbor, MI 48103</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">meetmeboard@meetme.com</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">Copyright &copy; MeetMe 2015</p>
+                    <br>
+                    <br>
+                    <a href="#home"><button type="button" class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>Back to top
+                    </button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script async src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Personal Javascript file -->
+
+    <script src="js/scripts.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    $(window).on('beforeunload', function(){
+        $(window).scrollTop(0);
+    });
+
+    $("#about_link").click(function(){
+        $("#top_link").css("display", "block");
+        $("#about_link").css("display", "none");
+    });
+
+    $("#top_link").click(function(){
+        $("#about_link").css("display", "block");
+        $("#top_link").css("display", "none");
+    });
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    var worldAirports;
+    $.getJSON("https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json", function(json) {
+        
+        worldAirports = json;
+        
+         $( "#InputLocation1" ).autocomplete({
+            source: function(request, response){
+                var searchTerm = request.term.toLowerCase();
+                var ret = [];
+                $.each(worldAirports, function(i, airportItem){
+                    if (!airportItem.iata || !airportItem.name) {}
+                    else if (airportItem.iata.toLowerCase().indexOf(searchTerm) !== -1 || airportItem.name.toLowerCase().indexOf(searchTerm) === 0) {
+                        ret.push(airportItem.name + ' - ' + airportItem.iata);
+                    }
+                });
+                console.log(ret);
+                response(ret.slice(0,10));
+
+            },
+            messages:{
+                noResults: '',
+                results: function() {}
+            }
+        });
+
+         $( "#destination" ).autocomplete({
+            source: function(request, response){
+                var searchTerm = request.term.toLowerCase();
+                var ret = [];
+                $.each(worldAirports, function(i, airportItem){
+                    if (!airportItem.iata || !airportItem.name) {}
+                    else if (airportItem.iata.toLowerCase().indexOf(searchTerm) !== -1 || airportItem.name.toLowerCase().indexOf(searchTerm) === 0) {
+                        ret.push(airportItem.name + ' - ' + airportItem.iata);
+                    }
+                });
+                console.log(ret);
+                response(ret.slice(0,10));
+
+            },
+            messages:{
+                noResults: '',
+                results: function() {}
+            }
+        });
+    
+    });
+
+
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+
+</body>
+
+
+</html>
