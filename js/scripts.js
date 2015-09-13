@@ -31,8 +31,12 @@ function decisionMode(){
 			localStorage.groupMode = groupMode;
 			localStorage.date = date;
 			localStorage.names = names;
+			localStorage.homes = homes;
 			localStorage.airports = airports;
 			localStorage.destinations = destinations;
+			localStorage.best = best;
+			localStorage.bestCoordinates = bestCoordinates;
+			localStorage.costs = costs;
 			$("#loading_page")[0].click();
 		}
 		else{
@@ -45,11 +49,15 @@ function decisionMode(){
 			groupComplete();
 		}
 		else{
+			localStorage.homes = homes;
 			localStorage.groupMode = groupMode;
 			localStorage.date = date;
 			localStorage.names = names;
 			localStorage.airports = airports;
 			localStorage.destinations = destinations;
+			localStorage.best = best;
+			localStorage.bestCoordinates = bestCoordinates;
+			localStorage.costs = costs;
 			$("#loading_page")[0].click();
 		}
 	}
@@ -61,6 +69,12 @@ function decideCalculation(){
 	names = localStorage.names;
 	airports = localStorage.airports;
 	destinations = localStorage.destinations;
+	costs = localStorage.costs;
+	bestCoordinates = localStorage.bestCoordinates;
+	best = localStorage.best;
+	homes = [];
+
+
 	console.log(groupMode);
 	if(groupMode){
 		calculateGroup();
@@ -93,6 +107,7 @@ function travellerSubmitted()
 	if ((document.getElementById("travellerForm").elements[0].value == "") || 
 		(document.getElementById("travellerForm").elements[1].value == ""))
 	{
+		//alert("You must input a destination for your traveller.");
 		showFailure();
 	}
 	else
@@ -149,10 +164,16 @@ function destinationSubmitted(){
 // 
 function calculateGroup(){
 	console.log("i continue to execute");
+
+	airports = airports.split(",");
+	destinations = destinations.split(",");
+
 	var costs = new Array(airports.length);
 	for (var i = 0; i < airports.length; i++) {
 		costs[i] = new Array(airports.length);
 	}
+
+	console.log(airports);
 
 	for (var i = 0; i < airports.length; i++) {
             for (var j = 0; j < destinations.length; j++) {
@@ -188,7 +209,7 @@ function calculateGroup(){
                     $.ajax({
                      type: "POST",
                      //Set up your request URL and API Key.
-                     url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBAauokW8lbtBNshsYEybcNVtVpvirSrZU&fields=trips(tripOption/saleTotal)", 
+                     url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDoyJVqSFHAkEYuyebic4M3pPJo2n3TPx4&fields=trips(tripOption/saleTotal)", 
                      contentType: 'application/json', // Set Content-type: application/json
                      dataType: 'json',
                      // The query we want from Google QPX, This will be the variable we created in the beginning
@@ -219,7 +240,7 @@ function calculateGroup(){
             }
             
             if (sum < bestsum) {
-                    best = j;
+                    best = i;
                     bestsum = sum;
             }
     }
@@ -228,39 +249,63 @@ function calculateGroup(){
     $.getJSON("https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json", function(json) { 
         worldAirports = json;
 	    $.each(worldAirports, function(k,airportItem){
-	    	$('#results')[0].click();
+	    	//$('#results')[0].click();
 	    	for (var i = 0; i < airports.length; i++) {
 	            if (airportItem.iata == airports[i].substring(airports[i].length-3)) {
 	            	var x = {lat: airportItem.lat, lon: airportItem.lon};
+
 	            	console.log(x);
+	            	console.log(typeof homes);
 	            	homes.push(x);
 	            }
 	        }
-	        
-	        if (destinations[best].substring(airports[i].length-3) == airportItem.iata) {
+	        if (destinations[best].substring(destinations[best].length-3) == airportItem.iata) {
 	        	bestCoordinates = {lat: airportItem.lat, lon: airportItem.lon};
+	        	
+	        	localStorage.bestCoordinates = JSON.stringify(bestCoordinates);
+	        	console.log(typeof localStorage.bestCoordinates);
+	        	
 	        }
 
 	    });
+	    debugger;
+	    localStorage.homes = JSON.stringify(homes);
+	    console.log(homes);
+	    debugger;
+	    $('#results')[0].click();
 	});
 
 
-	//console.log(homes);
+    //console.log(homes);
 	console.log("here");
     console.log(costs);
     console.log(bestsum);
     console.log("there");
-    buildMap();
-    printResults();
-    $('#results')[0].click();
+
+    localStorage.groupMode = groupMode;
+	localStorage.date = date;
+	localStorage.names = names;
+	localStorage.airports = airports;
+	localStorage.destinations = destinations;
+	localStorage.best = best;
+	localStorage.costs = costs;
+	
+
+   // $('#results')[0].click();
+   
 }
 
 // Travelling to friends place
 function calculateIndividual(){
+
+	airports = airports.split(",");
+
 	var costs = new Array(airports.length);
 	for (var i = 0; i < airports.length; i++) {
-		costs[i] = new Array(destinations.length);
+		costs[i] = new Array(airports.length);
 	}
+
+	//airports = airports.split(",");
 
 	console.log("in calculate!");
 	for (var i = 0; i < airports.length; i++) {
@@ -291,7 +336,7 @@ function calculateIndividual(){
                     $.ajax({
                      type: "POST",
                      //Set up your request URL and API Key.
-                     url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCKdzmljdq6bSuSHnXn-2aQNnt-8cUmdRI&fields=trips(tripOption/saleTotal)", 
+                     url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDoyJVqSFHAkEYuyebic4M3pPJo2n3TPx4&fields=trips(tripOption/saleTotal)", 
                      contentType: 'application/json', // Set Content-type: application/json
                      dataType: 'json',
                      // The query we want from Google QPX, This will be the variable we created in the beginning
@@ -347,84 +392,23 @@ function calculateIndividual(){
 	        
 	        if (airports[best].substring(airports[i].length-3) == airportItem.iata) {
 	        	bestCoordinates = {lat: airportItem.lat, lon: airportItem.lon};
+	        	localStorage.bestCoordinates = bestCoordinates;
 	        }
 
 	    });
+	    localStorage.homes = homes;
+	    $('#results')[0].click();
 	});
 
-        console.log(costs);
-        console.log(bestsum);
-        buildMap();
-        printResults();
-    $('#results')[0].click();
-}
 
-function buildMap() {
-	var friend_loc = [];  
-  	var final_dest  = new google.maps.LatLng(bestCoordinates.lat, bestCoordinates.lon); 
-
-	   for(var i = 0; i < homes.length(); ++i) { 
-	 
-	      friend_loc[i] = new google.maps.LatLng(homes[i].lat, homes[i].lon); 
-	   }
-
-	    var map_initialize = function () {
-	          var My_map = {
-	               center: final_dest,
-	               zoom: 1,
-	               mapTypeId: google.maps.MapTypeId.ROADMAP
-	          }; 
-	           var map = new google.maps.Map(document.getElementById("googleMap"), My_map); 
-	      
-	          //marker for each friend
-	          var friend_marker = []; 
-	          for(var j = 0; j < homes.length; ++j) {
-	            friend_marker[j] = new google.maps.Marker({ position: friend_loc[j] });
-	            friend_marker[j].setMap(map);
-	          }
-
-	          var meet_city = new google.maps.Circle({
-	              center: final_dest,
-	              radius:200000,
-	              strokeColor:"#0000FF",
-	              strokeOpacity:1.8,
-	              strokeWeight:1,
-	              fillColor:"#0000FF",
-	              fillOpacity:0.6
-	             });
-	           meet_city.setMap(map);
-
-	         //lines connecting friends to the final destination 
-	         var flight_path = []; 
-
-	         for(var k = 0; k < homes.length; ++k) {
-	          
-	          flight_path[k] = new google.maps.Polyline({
-	          path:[final_dest, friend_loc[k]],
-	          strokeColor:"#CC0000",
-	          strokeOpacity:0.8,
-	          strokeWeight:2
-	          })
-	          flight_path.setMap(map);;
-
-	         }
-	   }
-
-	   google.maps.event.addDomListener(window, 'load', map_initialize);
-}
-
-
-function printResults(){
-	if(groupMode){
-		document.getElementById('end_goal').innerHTML = destinations[best];
-	}
-    else{
-    	document.getElementById('end_goal').innerHTML = airports[best];
-    }
-    document.getElementById('date_of_departure').innerHTML = date;
-    for(var i = 0; i < names.length; ++i){
-    	$('#result_table').append('<tr><td>' + names[i] + '</td><td>' + costs[i][best] + '</td><td>' + airports[i] + '</td></tr>');
-    }
+	localStorage.groupMode = groupMode;
+	localStorage.date = date;
+	localStorage.names = names;
+	localStorage.airports = airports;
+	localStorage.destinations = destinations;
+	localStorage.best = best;
+	localStorage.costs = costs;
+    //$('#results')[0].click();
 }
 
 
