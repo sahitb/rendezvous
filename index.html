@@ -61,9 +61,11 @@
                             <div class="form-group">
                                 <label for="dateInput">Enter the date you wish to leave:</label>
                                 <input type="date" class="form-control" id="dateInput" placeholder="YYYY/MM/DD" value="">
-                                <div class="radio">
+                                <label for="dateInput2">Enter the date you wish to return:</label>
+                                <input type="date" class="form-control" id="dateInput2" placeholder="YYYY/MM/DD" value="">
+                                <!--<div class="radio">
                                     <label><input id="first_radio"name="mode" type="radio" class="optradio">I'm visiting friends!</label>
-                                </div>
+                                </div> -->
                                 <div class="radio">
                                     <label><input id="second_radio" name="mode" type="radio" class="optradio">We're going on a trip!</label>
                                 </div>
@@ -72,7 +74,11 @@
                         <div id = "noDate" style = "display:none "class="alert alert-danger">
 <!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
  -->                        <strong>Wait!</strong> Do you really expect to leave never?
-                      </div>
+                        </div>
+                        <div id = "noDate2" style = "display:none "class="alert alert-danger">
+<!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ -->                        <strong>Wait!</strong> Do you really expect to never return?
+                        </div>
                        <div id = "noMode" style = "display:none "class="alert alert-danger">
 <!--                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
  -->                        <strong>Wait!</strong> What are you planning to do?
@@ -290,7 +296,7 @@
 
     <!-- Personal Javascript file -->
 
-    <script src="js/scripts.js"></script>
+    <script src="js/index.js"></script>
 
 
     <!-- Custom Theme JavaScript -->

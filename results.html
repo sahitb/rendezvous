@@ -11,7 +11,6 @@
 
     <!--<script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>-->
     
-    <script src="js/scripts.js"></script>
 
     <title>Rendezvous | Travel the World With Your Friends.</title>
 
@@ -113,27 +112,17 @@
     <script src = "js/jquery.js"> </script>
     
     <script>
-    costs = localStorage.costs;
-    best = localStorage.best;
-    groupMode = localStorage.groupMode;
-    date = localStorage.date;
-    names = localStorage.names;
-    airports = localStorage.airports;
-    destinations = localStorage.destinations;
-    airports = airports.split(',');
-    console.log(costs);
-    costs = costs.split(',')
-    console.log(costs);
-    names = names.split(',');
-    destinations = destinations.split(',');
-    homes = localStorage.homes;
-    bestCoordinates = localStorage.bestCoordinates;
-    console.log(typeof homes);
-    homes = JSON.parse(homes);
-    bestCoordinates = JSON.parse(bestCoordinates);
+    var groupMode = localStorage.groupMode;
+    var costs = JSON.parse(localStorage.costs);
+    var best = parseInt(localStorage.best);
+    console.log(best);
+    var date = localStorage.dateDepart;
+    var names = JSON.parse(localStorage.names);
+    var airports = JSON.parse(localStorage.airports);
+    var destinations = JSON.parse(localStorage.destinations);    
+    var homes = JSON.parse(localStorage.homes);
+    var bestCoordinates = JSON.parse(localStorage.bestCoordinates);
     DrawMap();
-    //window.onload = buildMap;
-    //window.onload = printResults;
     function DrawMap() {
     var friend_loc = [];  
     var final_dest  = new google.maps.LatLng(bestCoordinates.lat, bestCoordinates.lon); 
@@ -142,8 +131,7 @@
        for(var i = 0; i < homes.length; ++i) { 
      
           friend_loc[i] = new google.maps.LatLng(homes[i].lat, homes[i].lon);
-          console.log(homes[i].lat);
-          console.log(homes[i].lon);
+          
        }
 
         var map_initialize = function () {
@@ -199,9 +187,8 @@
             document.getElementById('end_goal').innerHTML = airports[best];
         }
         document.getElementById('date_of_departure').innerHTML = date;
-        for(var i = 0; i < names.length; ++i){
-            console.log((destinations.length * i) + best);
-            $('#result_table').append('<tr><td>' + names[i] + '</td><td>' + "USD" +costs[Number(destinations.length * i) + Number(best)] + '</td><td>' + airports[i] + '</td></tr>');
+        for(var i = 0; i < costs.length; ++i){
+            $('#result_table').append('<tr><td>' + costs[i].name + '</td><td>' + "USD" + costs[i].price + '</td><td>' + costs[i].origin + '</td></tr>');
         }
     };
 
