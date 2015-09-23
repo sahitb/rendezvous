@@ -23,11 +23,11 @@ function dateSubmitted(){
 	else if (document.getElementById("dateInput2").value == "") {
 		$('#noDate2').css("display", "block");
 	}
-	else if(document.getElementById("first_radio").checked == false && 
+	/*else if(document.getElementById("first_radio").checked == false && 
 		document.getElementById("second_radio").checked == false){
 		$('#noMode').css("display", "block");
 		$('#noDate').css("display", "none");
-	}
+	}*/
 	else{
 		if(document.getElementById("second_radio").checked == true){
 			console.log("groupmode is true");
