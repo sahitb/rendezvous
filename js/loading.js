@@ -60,23 +60,6 @@ function calculateGroup(){
     })(i);
     
   }
-  /*$.each(destinations, function (i, item) {
-    console.log(item);
-    $.getJSON("http://terminal2.expedia.com/x/suggestions/regions?", {query: item, apikey: ExpediaKey})
-        .done(function(json) { 
-           console.log(i);
-           console.log(destinations.length);
-           destinationsID.push(json.sr[0].id);
-           if (i == destinations.length - 1) {
-            console.log(destinationsID);
-           }
-          
-        })
-        .fail(function() {
-            console.log("Expedia Suggestions API failed");
-        });
-  });
-*/
 }
 
 //Get costs from expedia api
@@ -105,6 +88,10 @@ function getCosts(){
                 }
                 $.getJSON("http://terminal2.expedia.com/x/packages?", data)
                   .done(function(json) {
+
+                    if (json.FlightList.Flight == null) {
+                      alert("One of the flights were not found by Expedia's API Please try different airports!");
+                    }
 
                     var detail = {origin: origin, destination: destination, price: json.FlightList.Flight.FlightPrice.TotalRate.Value, name: names[i]};
                     costs.push(detail);
