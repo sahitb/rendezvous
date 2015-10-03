@@ -37,10 +37,12 @@ function decideCalculation(){
 function calculateGroup(){
 
   for (var i = 0; i < destinations.length; i++) { 
+    
     (function(i) {
       var data = destinations[i].toString();
       data = data.replace('-', '');
       //console.log(data);
+      setTimeout(function(){
       $.getJSON("http://terminal2.expedia.com/x/suggestions/regions?", {query: data, apikey: ExpediaKey})
         .done(function(json) { 
           
@@ -54,7 +56,9 @@ function calculateGroup(){
             alert("Please reload the page!");
             console.log("Expedia Suggestions API failed");
         });
+        }, 1000 * i);
     })(i);
+    
   }
   /*$.each(destinations, function (i, item) {
     console.log(item);
