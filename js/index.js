@@ -29,10 +29,9 @@ function dateSubmitted(){
 		$('#noDate').css("display", "none");
 	}*/
 	else{
-		if(document.getElementById("second_radio").checked == true){
+		
 			console.log("groupmode is true");
 			groupMode = true;
-		}
 		$('#noDate').css("display", "none");
 		$('#noDate2').css("display", "none");
 		$('#noMode').css("display", "none");
