@@ -122,7 +122,8 @@
     var destinations = JSON.parse(localStorage.destinations);    
     var homes = JSON.parse(localStorage.homes);
     var bestCoordinates = JSON.parse(localStorage.bestCoordinates);
-    DrawMap();
+    DrawMap(); 
+    //Draws a map using Google Map API
     function DrawMap() {
     var friend_loc = [];  
     var final_dest  = new google.maps.LatLng(bestCoordinates.lat, bestCoordinates.lon); 
